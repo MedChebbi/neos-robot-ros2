@@ -88,7 +88,7 @@
     <joint name="${name}_joint" type="fixed">
       <parent link="base_link"/>
       <child link="${name}"/>
-      <origin xyz="${x_pos} 0 -0.03" rpy="0 0 0"/>
+      <origin xyz="${x_pos} 0 -0.04" rpy="0 0 0"/>
     </joint>
   </xacro:macro>
 
