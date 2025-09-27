@@ -24,7 +24,7 @@ def generate_launch_description():
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(gz_launch_path),
             launch_arguments={
-                'gz_args': PathJoinSubstitution([pkg_path, 'worlds/empty.sdf']),  # Replace with your own world file
+                'gz_args': PathJoinSubstitution([pkg_path, 'worlds/simple_world.sdf']),  # Use simple_world with NEOS model
                 'on_exit_shutdown': 'True'
             }.items(),
         ),
