@@ -31,7 +31,7 @@ source install/setup.bash
 # Visualize in RViz
 ros2 launch neos_description display.launch.py model:=urdf/neos.urdf
 
-# Launch in Gazebo (coming soon)
+# Launch in Gazebo
 ros2 launch neos_gazebo gazebo.launch.py
 ```
 
