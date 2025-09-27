@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="neos">
 
+  <!-- Include sensor definitions -->
+  <xacro:include filename="$(find neos_description)/urdf/neos_lidar.xacro"/>
+
   <!-- Parameters -->
   <xacro:property name="base_radius" value="0.2"/>
   <xacro:property name="base_length" value="0.1"/>
@@ -88,7 +91,7 @@
     <joint name="${name}_joint" type="fixed">
       <parent link="base_link"/>
       <child link="${name}"/>
-      <origin xyz="${x_pos} 0 -0.044" rpy="0 0 0"/>
+      <origin xyz="${x_pos} 0 -0.048" rpy="0 0 0"/>
     </joint>
   </xacro:macro>
 
@@ -99,5 +102,11 @@
   <!-- Create Casters -->
   <xacro:caster name="front_caster" x_pos="0.15"/>
   <xacro:caster name="rear_caster" x_pos="-0.15"/>
+
+  <!-- Add LiDAR Sensor (using default parameters) -->
+  <xacro:neos_lidar/>
+
+  <!-- Alternative: Add LiDAR with custom parameters -->
+  <!-- <xacro:neos_lidar parent_link="base_link" x="0" y="0" z="0.25" topic="/scan" update_rate="30" min_range="0.1" max_range="5.0" samples="360"/> -->
 
 </robot>
