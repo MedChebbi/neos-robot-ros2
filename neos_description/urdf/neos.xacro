@@ -88,13 +88,13 @@
     <joint name="${name}_joint" type="fixed">
       <parent link="base_link"/>
       <child link="${name}"/>
-      <origin xyz="${x_pos} 0 -0.04" rpy="0 0 0"/>
+      <origin xyz="${x_pos} 0 -0.044" rpy="0 0 0"/>
     </joint>
   </xacro:macro>
 
   <!-- Create Wheels -->
-  <xacro:wheel name="left_wheel" side="1"/>
-  <xacro:wheel name="right_wheel" side="-1"/>
+  <xacro:wheel name="left_wheel" side="-1"/>
+  <xacro:wheel name="right_wheel" side="1"/>
 
   <!-- Create Casters -->
   <xacro:caster name="front_caster" x_pos="0.15"/>
