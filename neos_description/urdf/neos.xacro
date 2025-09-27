@@ -104,9 +104,9 @@
   <xacro:caster name="rear_caster" x_pos="-0.15"/>
 
   <!-- Add LiDAR Sensor (using default parameters) -->
-  <xacro:neos_lidar/>
+  <!-- <xacro:neos_lidar/> -->
 
   <!-- Alternative: Add LiDAR with custom parameters -->
-  <!-- <xacro:neos_lidar parent_link="base_link" x="0" y="0" z="0.25" topic="/scan" update_rate="30" min_range="0.1" max_range="5.0" samples="360"/> -->
+  <xacro:neos_lidar parent_link="base_link" x="0" y="0" z="0.09"/>
 
 </robot>
