@@ -2,7 +2,7 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="neos_lidar">
 
   <!-- Parameterized LiDAR Sensor Macro -->
-  <xacro:macro name="neos_lidar" params="parent_link:=base_link x:=0 y:=0 z:=0.2 topic:=/scan update_rate:=30 min_range:=0.12 max_range:=3.5 samples:=720">
+  <xacro:macro name="neos_lidar" params="parent_link:=base_link x:=0 y:=0 z:=0.2 topic:=/scan update_rate:=30 min_range:=0.1 max_range:=7.0 samples:=720">
     
     <!-- LiDAR Link -->
     <link name="lidar_link">
@@ -35,11 +35,12 @@
 
     <!-- Gazebo Sim LiDAR Sensor -->
     <gazebo reference="lidar_link">
-      <sensor name="lidar_sensor" type="lidar">
+      <sensor name="lidar_sensor" type="gpu_lidar">
         <pose>0 0 0 0 0 0</pose>
-        <visualize>true</visualize>
+        <topic>${topic}</topic>
         <update_rate>${update_rate}</update_rate>
-        <lidar>
+        <visualize>true</visualize>
+        <ray>
           <scan>
             <horizontal>
               <samples>${samples}</samples>
@@ -47,6 +48,12 @@
               <min_angle>-1.5708</min_angle>
               <max_angle>1.5708</max_angle>
             </horizontal>
+            <vertical>
+              <samples>1</samples>
+              <resolution>0.01</resolution>
+              <min_angle>0</min_angle>
+              <max_angle>0</max_angle>
+            </vertical>
           </scan>
           <range>
             <min>${min_range}</min>
@@ -58,11 +65,8 @@
             <mean>0.0</mean>
             <stddev>0.01</stddev>
           </noise>
-        </lidar>
-        <plugin filename="gz-sim-lidar-system" name="gz::sim::systems::Lidar">
-          <topic>${topic}</topic>
-          <frame_name>lidar_link</frame_name>
-        </plugin>
+        </ray>
+        <always_on>1</always_on>
       </sensor>
     </gazebo>
 

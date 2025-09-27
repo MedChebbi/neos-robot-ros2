@@ -62,7 +62,7 @@
       <parent link="base_link"/>
       <child link="${name}"/>
       <origin xyz="0 ${side * wheel_separation/2} -${wheel_radius/2}" rpy="1.5708 0 0"/>
-      <axis xyz="0 0 1"/>
+      <axis xyz="0 0 -1"/>
     </joint>
   </xacro:macro>
 
@@ -91,13 +91,13 @@
     <joint name="${name}_joint" type="fixed">
       <parent link="base_link"/>
       <child link="${name}"/>
-      <origin xyz="${x_pos} 0 -0.048" rpy="0 0 0"/>
+      <origin xyz="${x_pos} 0 -0.04499" rpy="0 0 0"/>
     </joint>
   </xacro:macro>
 
   <!-- Create Wheels -->
-  <xacro:wheel name="left_wheel" side="-1"/>
-  <xacro:wheel name="right_wheel" side="1"/>
+  <xacro:wheel name="left_wheel" side="1"/>
+  <xacro:wheel name="right_wheel" side="-1"/>
 
   <!-- Create Casters -->
   <xacro:caster name="front_caster" x_pos="0.15"/>
