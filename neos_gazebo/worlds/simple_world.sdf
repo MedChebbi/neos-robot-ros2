@@ -7,7 +7,7 @@
     gz topic -e -t /model/diff_drive/odometry
     ros2 topic echo /model/diff_drive/odometry
 -->
-<sdf version="1.8">
+<sdf version="1.12">
   <world name="simple_world">
     <plugin
       filename="gz-sim-physics-system"
@@ -102,6 +102,8 @@
         name="gz::sim::systems::OdometryPublisher">
         <odom_frame>odom</odom_frame>
         <robot_base_frame>base_link</robot_base_frame>
+        <publish_tf>true</publish_tf>
+        <publish_odom>true</publish_odom>
       </plugin>
     </model>
 

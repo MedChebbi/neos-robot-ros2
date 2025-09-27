@@ -7,9 +7,26 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-# uncomment the following section in order to fill in
-# further dependencies manually.
-# find_package(<dependency> REQUIRED)
+
+# Install launch files
+install(DIRECTORY
+  launch
+  DESTINATION share/${PROJECT_NAME}/launch
+)
+
+# Install world files
+install(DIRECTORY
+  worlds/
+  DESTINATION share/${PROJECT_NAME}/worlds
+  FILES_MATCHING PATTERN "*.sdf"
+)
+
+# Install model files
+install(DIRECTORY
+  models/
+  DESTINATION share/${PROJECT_NAME}/models
+  FILES_MATCHING PATTERN "*.sdf"
+)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
