@@ -12,6 +12,7 @@
     <plugin
       filename="gz-sim-physics-system"
       name="gz::sim::systems::Physics">
+      <max_step_size>0.001</max_step_size>
     </plugin>
     <plugin
       filename="gz-sim-sensors-system"
@@ -50,6 +51,14 @@
               <size>100 100</size>
             </plane>
           </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.0</mu>
+                <mu2>1.0</mu2>
+              </ode>
+            </friction>
+          </surface>
         </collision>
         <visual name="visual">
           <geometry>
