@@ -31,8 +31,14 @@ source install/setup.bash
 # Visualize in RViz
 ros2 launch neos_description display.launch.py model:=urdf/neos.urdf
 
-# Launch in Gazebo
+# Launch simulation (Gazebo + Robot)
+ros2 launch neos_bringup simulation.launch.py
+
+# Launch just Gazebo (simulation only)
 ros2 launch neos_gazebo gazebo.launch.py
+
+# Launch just robot (TF + robot state)
+ros2 launch neos_bringup robot.launch.py
 ```
 
 ## Learning Path

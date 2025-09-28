@@ -3,14 +3,13 @@ from launch import LaunchDescription
 from launch_ros.actions import Node
 from launch.actions import SetEnvironmentVariable, IncludeLaunchDescription, DeclareLaunchArgument
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import PathJoinSubstitution, LaunchConfiguration, Command
+from launch.substitutions import PathJoinSubstitution, LaunchConfiguration
 from launch_ros.substitutions import FindPackageShare
 
 
 def generate_launch_description():
     # Get package paths
     neos_gazebo_pkg_path = get_package_share_directory('neos_gazebo')
-    neos_description_pkg_path = get_package_share_directory('neos_description')
     
     # Find ros_gz_sim package
     ros_gz_sim_pkg = FindPackageShare('ros_gz_sim').find('ros_gz_sim')
@@ -52,47 +51,22 @@ def generate_launch_description():
                 
                 # LiDAR sensor
                 '/scan@sensor_msgs/msg/LaserScan@gz.msgs.LaserScan',
-                
-                # Joint states
-                '/model/neos/joint_state@sensor_msgs/msg/JointState@gz.msgs.JointState',
-                
-                # Pose information (use PoseStamped for TF compatibility)
-                '/model/neos/pose@geometry_msgs/msg/PoseStamped@gz.msgs.Pose_V',
             ],
             remappings=[
                 # Remap to standard ROS2 topic names
                 ('/model/neos/cmd_vel', '/cmd_vel'),
                 ('/model/neos/odometry', '/odom'),
-                ('/model/neos/joint_state', '/joint_states'),
-                ('/model/neos/pose', '/robot_pose'),
+                ('/scan', '/scan'),
             ],
             output='screen'
         ),
         
-        # Robot State Publisher (for TF tree)
+        # Static transform for LiDAR frame (Gazebo naming)
         Node(
-            package='robot_state_publisher',
-            executable='robot_state_publisher',
-            name='robot_state_publisher',
-            parameters=[{
-                'use_sim_time': True,
-                'robot_description': Command([
-                    'xacro ', PathJoinSubstitution([
-                        neos_description_pkg_path, 'urdf', 'neos.xacro'
-                    ])
-                ])
-            }],
-            output='screen'
-        ),
-        
-        # Joint State Publisher (for manual joint control)
-        Node(
-            package='joint_state_publisher',
-            executable='joint_state_publisher',
-            name='joint_state_publisher',
-            parameters=[{
-                'use_sim_time': True
-            }],
+            package='tf2_ros',
+            executable='static_transform_publisher',
+            name='lidar_frame_publisher',
+            arguments=['0', '0', '0.09', '0', '0', '0', 'base_link', 'neos/base_link/lidar_sensor'],
             output='screen'
         ),
     ])

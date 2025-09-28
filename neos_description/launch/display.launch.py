@@ -28,8 +28,7 @@ def generate_launch_description():
         launch_arguments={
             'urdf_package': 'neos_description',
             'urdf_package_path': LaunchConfiguration('model'),
-            'rviz_config': LaunchConfiguration('rvizconfig'),
-            'jsp_gui': LaunchConfiguration('gui')}.items()
+            'rviz_config': LaunchConfiguration('rvizconfig')}.items()
     ))
 
     return ld
